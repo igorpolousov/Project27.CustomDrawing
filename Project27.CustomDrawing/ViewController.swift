@@ -7,7 +7,7 @@
 
 import UIKit
 
-// test commit
+// Возврат к тестовому коммиту
 
 class ViewController: UIViewController {
     
