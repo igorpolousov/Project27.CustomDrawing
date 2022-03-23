@@ -11,6 +11,8 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    // sth
+    
     @IBOutlet var imageView: UIImageView!
     var currentDrawType = 0
     
