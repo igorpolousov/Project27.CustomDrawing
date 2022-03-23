@@ -7,6 +7,7 @@
 
 import UIKit
 
+// Возврат к тестовому коммиту
 
 class ViewController: UIViewController {
     
