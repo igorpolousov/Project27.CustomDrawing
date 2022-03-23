@@ -8,11 +8,16 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
     @IBOutlet var imageView: UIImageView!
     var currentDrawType = 0
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        drawRectangle()
+        
     }
 
     @IBAction func redrawButton(_ sender: Any) {
@@ -31,7 +36,19 @@ class ViewController: UIViewController {
     }
     
     func drawRectangle() {
+        let renderer = UIGraphicsImageRenderer(size: CGSize(width: 512, height: 512))
         
+        let image = renderer.image { ctx in
+            //drawing code
+            let rectangle = CGRect(x: 0, y: 0, width: 512, height: 512)
+            ctx.cgContext.setFillColor(UIColor.red.cgColor)
+            ctx.cgContext.setStrokeColor(UIColor.black.cgColor)
+            ctx.cgContext.setLineWidth(10)
+            ctx.cgContext.addRect(rectangle)
+            ctx.cgContext.drawPath(using: .fillStroke)
+        }
+        
+        imageView.image = image
     }
     
 }
