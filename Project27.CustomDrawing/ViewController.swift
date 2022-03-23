@@ -53,6 +53,9 @@ class ViewController: UIViewController {
         }
         
         imageView.image = image
+
+        // no drawings
+
     }
     
 }
