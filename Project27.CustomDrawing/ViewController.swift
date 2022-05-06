@@ -189,27 +189,35 @@ class ViewController: UIViewController {
     
     // challenge 1
     func drawSurprisedEmoji() {
+        // Размер полотна
         let imgWidth = 512
         let imgHeight = 512
+        
+        // Метод для рисования на экране изображений
         let renderer = UIGraphicsImageRenderer(size: CGSize(width: imgWidth, height: imgHeight))
         
+        // Создаём картинку
         let image = renderer.image { ctx in
-            
+            // Задали размеры картинки и задали отступ чтобы картинка не обрезалась
             let faceWidth = imgWidth
             let faceHeight = imgWidth
             let faceInsets: CGFloat = 20
             
+            // Вызов функции нарисовать лицо: желтый круг с оранжевой обводкой
             drawFace(ctx: ctx.cgContext, width: faceWidth, height: faceHeight, insets: faceInsets, startX: 0, startY: 0, fillColor: UIColor.yellow.cgColor, strokeColor: UIColor.orange.cgColor)
 
+            // Заданы позиции для глаз
             let eyeHorizontalMargin: CGFloat = 130
             let eyeTopMargin: CGFloat = 150
             let eyeWidth = 60
             let eyeHeight = 70
             
+            // Левый глаз
             let leftEyeStartX = eyeHorizontalMargin
             let leftEyeStartY = eyeTopMargin
             drawEye(ctx: ctx.cgContext, width: eyeWidth, height: eyeHeight, startX: leftEyeStartX, startY: leftEyeStartY, color: UIColor.orange.cgColor)
 
+            // Правый глаз
             let rightEyeStartX = CGFloat(imgWidth) - CGFloat(eyeWidth) - eyeHorizontalMargin
             let rightEyrStartY = eyeTopMargin
             drawEye(ctx: ctx.cgContext, width: eyeWidth, height: eyeHeight, startX: rightEyeStartX, startY: rightEyrStartY, color: UIColor.orange.cgColor)
