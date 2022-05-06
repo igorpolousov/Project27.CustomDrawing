@@ -36,6 +36,10 @@ class ViewController: UIViewController {
             drawRectangle()
         case 1:
             drawCircle()
+        case 2:
+            drawCheckerboard()
+        case 3:
+            drawRotatedSquares()
         default:
             break
         }
@@ -51,14 +55,12 @@ class ViewController: UIViewController {
             ctx.cgContext.setFillColor(UIColor.red.cgColor)
             ctx.cgContext.setStrokeColor(UIColor.black.cgColor)
             ctx.cgContext.setLineWidth(10)
+            
             ctx.cgContext.addRect(rectangle)
             ctx.cgContext.drawPath(using: .fillStroke)
         }
         
         imageView.image = image
-
-        // no drawings
-
     }
     
     func drawCircle() {
@@ -67,7 +69,11 @@ class ViewController: UIViewController {
         
         let image = renderer.image { ctx in
             //drawing code
-            let rectangle = CGRect(x: 0, y: 0, width: 512, height: 512)
+            // Если оставить координаты и размеры как есть, то справ и слева круг будет обрезан, чтобы исправить ситуацию
+            // нужно: 1. Либо изменить начальные координаты x y от 0 на 5 и уменьшить размеры на 10
+            // 2. Либо добавить расстояние до краёв insetsBy
+            let rectangle = CGRect(x: 0, y: 0, width: 512, height: 512).insetBy(dx: 5, dy: 5)
+            
             ctx.cgContext.setFillColor(UIColor.red.cgColor)
             ctx.cgContext.setStrokeColor(UIColor.black.cgColor)
             ctx.cgContext.setLineWidth(10)
@@ -77,9 +83,46 @@ class ViewController: UIViewController {
         }
         
         imageView.image = image
-
-        // no drawings
-
+    }
+    
+    func drawCheckerboard() {
+        
+        let renderer = UIGraphicsImageRenderer(size: CGSize(width: 512, height: 512))
+        
+        let image = renderer.image { ctx in
+            //drawing code
+            ctx.cgContext.setFillColor(UIColor.black.cgColor)
+            
+            for row in 0 ..< 8 {
+                for col in 0 ..< 8 {
+                    if (row + col) % 2 == 0 {
+                        ctx.cgContext.fill(CGRect(x: col * 64, y: row * 64, width: 64, height: 64))
+                    }
+                }
+            }
+        }
+        
+        imageView.image = image
+    }
+    
+    func drawRotatedSqaures() {
+        
+        let renderer = UIGraphicsImageRenderer(size: CGSize(width: 512, height: 512))
+        
+        let image = renderer.image { ctx in
+            //drawing code
+            ctx.cgContext.setFillColor(UIColor.black.cgColor)
+            
+            for row in 0 ..< 8 {
+                for col in 0 ..< 8 {
+                    if (row + col) % 2 == 0 {
+                        ctx.cgContext.fill(CGRect(x: col * 64, y: row * 64, width: 64, height: 64))
+                    }
+                }
+            }
+        }
+        
+        imageView.image = image
     }
     
 }
