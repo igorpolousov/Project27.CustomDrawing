@@ -105,21 +105,21 @@ class ViewController: UIViewController {
         imageView.image = image
     }
     
-    func drawRotatedSqaures() {
+    func drawRotatedSquares() {
         
         let renderer = UIGraphicsImageRenderer(size: CGSize(width: 512, height: 512))
         
         let image = renderer.image { ctx in
             //drawing code
-            ctx.cgContext.setFillColor(UIColor.black.cgColor)
+            ctx.cgContext.translateBy(x: 256, y: 256)
             
-            for row in 0 ..< 8 {
-                for col in 0 ..< 8 {
-                    if (row + col) % 2 == 0 {
-                        ctx.cgContext.fill(CGRect(x: col * 64, y: row * 64, width: 64, height: 64))
-                    }
-                }
+            let rotations = 16
+            let amount = Double.pi / Double(rotations)
+            for _ in 0 ..< rotations {
+                ctx.cgContext.rotate(by: CGFloat(amount))
+                ctx.cgContext.addRect(CGRect(x: -128, y: -128, width: 256, height: 256))
             }
+            ctx.cgContext.setStrokeColor(UIColor.black.cgColor)
         }
         
         imageView.image = image
